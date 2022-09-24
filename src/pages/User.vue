@@ -144,8 +144,13 @@ export default {
                 requestUrl += "&phoneNumber=" + this.inputPhone;
             }
             this.axios.get(requestUrl).then(res => {
+              if (res.data.code === 1) {
                 this.tableData = res.data.data.records;
                 this.total = res.data.data.total;
+              } else {
+                this.$message.error(res.data.msg)
+              }
+                
             });
         },
         handleSizeChange(newPageSize) {

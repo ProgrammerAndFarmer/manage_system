@@ -42,6 +42,10 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function (response) {
     // Do something with response data
+    if (response.data.msg == '无token， 请重新登录') {
+      Vue.prototype.$message.error('无token， 请先登录！')
+      window.location.href = "/user/login"
+    }
     return response;
   },
   function (error) {
